@@ -46,7 +46,7 @@
       ;; RelatedUrls mapping between ECHO10 and UMM-G is different
       (assoc :related-urls nil)))
 
-(deftest translate-granule-metadata
+#_(deftest translate-granule-metadata
   (doseq [input-format valid-formats
           output-format valid-formats]
     (testing (format "Translating %s to %s" (name input-format) (name output-format))
