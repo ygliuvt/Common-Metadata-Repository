@@ -562,7 +562,7 @@
                       (:concept-id collection)
                       {:granule-ur "gran2"
                        :data-provider-timestamps {:delete-time
-                                                  (t/plus (tk/now) (t/seconds 90))}})
+                                                  (t/plus (tk/now) (t/seconds 70))}})
              response (data-core/ingest "PROV1" granule {:format :umm-json})]
          (is (= 201 (:status response)))
          (index/wait-until-indexed)
