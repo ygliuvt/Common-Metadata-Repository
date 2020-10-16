@@ -5,7 +5,7 @@
 
 (defconfig db-url
   "db url"
-  {:default "thin:@localhost:1521:orcl"})
+  {:default "thin:@localhost:1521/ORCL"})
 
 (defconfig db-fcf-enabled
   "Enables or disables fast connection failover in Oracle jdbc."
