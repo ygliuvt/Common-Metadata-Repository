@@ -502,6 +502,7 @@
           :measurements-lowercase m/string-field-mapping
           :variables variables-mapping
 
+          
           ;; associated services
           :service-names (m/doc-values m/string-field-mapping)
           :service-names-lowercase (m/doc-values m/string-field-mapping)
