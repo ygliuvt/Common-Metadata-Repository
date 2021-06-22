@@ -12,19 +12,19 @@ on:
     branches: [ master ]
     paths:
       - 'graph-db/**'
-    
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: graph-db
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     services:
@@ -36,7 +36,7 @@ jobs:
         ports:
           # Opens tcp port 8182 on the host and service container
           - 8182:8182
-          
+
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
