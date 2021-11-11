@@ -8,9 +8,10 @@ let driverRC
 
 export const closeGremlinConnection = () => {
   if (driverRC) {
-    driverRC.close()
-    driverRC = null
-    connection = null
+    return driverRC.close().then(() => {
+      driverRC = null
+      connection = null
+    })
   }
 }
 
@@ -25,7 +26,9 @@ export const initializeGremlinConnection = () => {
 
   const gremlinUrl = process.env.GREMLIN_URL
 
-  driverRC = new DriverRemoteConnection(gremlinUrl, {})
+  if (!driverRC) {
+    driverRC = new DriverRemoteConnection(gremlinUrl, {})
+  }
 
   const graph = new Graph()
   connection = graph.traversal().withRemote(driverRC)
