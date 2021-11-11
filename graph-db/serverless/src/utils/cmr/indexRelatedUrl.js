@@ -23,7 +23,7 @@ export const indexRelatedUrl = async (
   } = relatedUrl
 
   try {
-    const addVCommand = gremlinConnection.addV('relatedUrl')
+    const addVCommand = gremlinStatistics.addV('relatedUrl')
       .property('url', url)
       .property('type', type)
 
@@ -57,7 +57,7 @@ export const indexRelatedUrl = async (
       .V(collection)
       .coalesce(
         gremlinStatistics.outE('linkedBy').where(gremlinStatistics.inV().as('d')),
-        gremlinConnection.addE('linkedBy').to('d')
+        gremlinStatistics.addE('linkedBy').to('d')
       )
       .next()
 

@@ -8,10 +8,19 @@ let driverRC
 
 export const closeGremlinConnection = () => {
   if (driverRC) {
-    return driverRC.close().then(() => {
-      driverRC = null
-      connection = null
-    })
+console.log("-------closeGremlinConnection------")
+
+//     return driverRC.close().then(() => {
+//       driverRC = null
+//       connection = null
+// console.log("!!!!!!closeGremlinConnection!!!!!!")
+//
+//     })
+Promise.resolve(driverRC.close())
+    driverRC = null
+    connection = null
+console.log("!!!!!!closeGremlinConnection!!!!!!")
+
   }
 }
 
@@ -32,6 +41,6 @@ export const initializeGremlinConnection = () => {
 
   const graph = new Graph()
   connection = graph.traversal().withRemote(driverRC)
-
+console.log("=======initializeGremlinConnection=====")
   return connection
 }

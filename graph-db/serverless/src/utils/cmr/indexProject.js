@@ -23,7 +23,7 @@ export const indexProject = async (project, gremlinConnection, collection, conce
       .fold()
       .coalesce(
         gremlinStatistics.unfold(),
-        gremlinConnection.addV('project').property('name', shortName)
+        gremlinStatistics.addV('project').property('name', shortName)
       )
       .next()
 
@@ -38,7 +38,7 @@ export const indexProject = async (project, gremlinConnection, collection, conce
       .V(collection)
       .coalesce(
         gremlinStatistics.outE('includedIn').where(gremlinStatistics.inV().as('c')),
-        gremlinConnection.addE('includedIn').to('c')
+        gremlinStatistics.addE('includedIn').to('c')
       )
       .next()
 

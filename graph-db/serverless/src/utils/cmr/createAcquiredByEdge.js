@@ -18,7 +18,7 @@ export const createAcquiredByEdge = async (piId, gremlinConnection, collection) 
       .V(collection)
       .coalesce(
         gremlinStatistics.outE('acquiredBy').where(gremlinStatistics.inV().as('p')),
-        gremlinConnection.addE('acquiredBy').to('p')
+        gremlinStatistics.addE('acquiredBy').to('p')
       )
       .next()
   } catch (error) {

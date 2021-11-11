@@ -32,7 +32,7 @@ export const indexPlatform = async (platform, gremlinConnection, collection, con
         .fold()
         .coalesce(
           gremlinStatistics.unfold(),
-          gremlinConnection.addV('platformInstrument').property('platform', platformName)
+          gremlinStatistics.addV('platformInstrument').property('platform', platformName)
         )
         .next()
 

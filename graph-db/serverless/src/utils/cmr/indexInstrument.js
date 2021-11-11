@@ -26,7 +26,7 @@ export const indexInstrument = async (instrument, gremlinConnection, platformNam
       .fold()
       .coalesce(
         gremlinStatistics.unfold(),
-        gremlinConnection.addV('platformInstrument').property('platform', platformName).property('instrument', instrumentName)
+        gremlinStatistics.addV('platformInstrument').property('platform', platformName).property('instrument', instrumentName)
       )
       .next()
   } catch (error) {

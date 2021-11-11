@@ -34,12 +34,17 @@ export const indexCmrCollection = async (collectionObj, gremlinConnection) => {
   await deleteCmrCollection(conceptId, gremlinConnection)
 
   let collection = null
-  const addVCommand = gremlinConnection.addV('collection')
-    .property('title', entryTitle)
-    .property('id', conceptId)
+  let addVCommand = null
 
   if (doiDescription) {
-    addVCommand.property('doi', doiDescription)
+    addVCommand = gremlinStatistics.addV('collection')
+      .property('title', entryTitle)
+      .property('id', conceptId)
+      .property('doi', doiDescription)
+  } else {
+    addVCommand = gremlinStatistics.addV('collection')
+      .property('title', entryTitle)
+      .property('id', conceptId)
   }
 
   try {
