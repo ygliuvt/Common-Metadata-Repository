@@ -213,7 +213,7 @@
 (defn- find-concepts-by-parameters
   "Invokes query service to parse the parameters query, find results, and
   return the response"
-  [ctx path-w-extension params headers body]
+  [ctx path-w-extension params headers body post?]
   (let [concept-type (concept-type-path-w-extension->concept-type path-w-extension)
         short-scroll-id (get headers (string/lower-case common-routes/SCROLL_ID_HEADER))
         scroll-id-and-search-params (core-api/get-scroll-id-and-search-params-from-cache ctx short-scroll-id)
@@ -229,6 +229,9 @@
         log-message (format "Searching for %ss from client %s in format %s with params %s"
                             (name concept-type) (:client-id ctx)
                             (rfh/printable-result-format result-format) (pr-str params))
+        log-message (if post?
+                      (format "%s, with POST: %s." log-message body)
+                      log-message)
         _ (info (cond
                   short-scroll-id (format "%s, scroll-id: %s." log-message short-scroll-id)
                   search-after (format "%s, search-after: %s." log-message search-after)
@@ -259,10 +262,12 @@
       (= mt/json content-type-header)
       (find-concepts-by-json-query ctx path-w-extension params headers body)
 
+      (= mt/form-url-encoded content-type-header)
+      (find-concepts-by-parameters ctx path-w-extension params headers body true)
+
       (or (nil? content-type-header)
-          (= mt/form-url-encoded content-type-header)
           (re-find (re-pattern mt/multi-part-form) content-type-header))
-      (find-concepts-by-parameters ctx path-w-extension params headers body)
+      (find-concepts-by-parameters ctx path-w-extension params headers body false)
 
       :else
       {:status 415
