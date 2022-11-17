@@ -6,13 +6,15 @@
                com.fasterxml.jackson.core/jackson-core
                com.fasterxml.jackson.dataformat/jackson-dataformat-cbor
                commons-codec
+               commons-jxpath/commons-jxpath
                org.apache.httpcomponents/httpclient
                org.clojure/clojure
                org.clojure/tools.reader
                org.eclipse.emf/org.eclipse.emf.common
                org.eclipse.emf/org.eclipse.emf.ecore
-               ring/ring-codec
-               org.mozilla/rhino]
+               org.hsqldb/hsqldb 
+               org.mozilla/rhino
+               ring/ring-codec]
   :dependencies [[cheshire "5.8.1"]
                  [clj-time "0.15.1"]
                  [com.fasterxml.jackson.core/jackson-annotations "2.13.2"]
@@ -40,7 +42,7 @@
                  [org.eclipse.emf/org.eclipse.emf.ecore "2.23.0"]
                  [org.eclipse.emf/org.eclipse.emf.common "2.21.0"]
                  [org.geotools/gt-shapefile "29-SNAPSHOT"]
-                 [org.geotools/gt-geojsondatastore "24.6"]
+                 [org.geotools/gt-geojsondatastore "26.4"]
                  [org.geotools.xsd/gt-xsd-kml "27.1"]
                  [org.mozilla/rhino "1.7.12"]
                  [ring/ring-codec "1.1.3"]
